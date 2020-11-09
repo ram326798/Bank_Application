@@ -12,6 +12,11 @@ api = Api(app, errors=errors)
 app.config['MONGODB_SETTINGS'] = {
     'host': 'mongodb://localhost/User'
 }
+
+#for pytest
+# app.config['MONGODB_SETTINGS'] = {
+#     'host': 'mongodb://localhost/User-test'
+# }
 app.config['PROPAGATE_EXCEPTIONS'] = False
 
 initialize_db(app)
