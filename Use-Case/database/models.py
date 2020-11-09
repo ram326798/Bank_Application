@@ -15,7 +15,7 @@ class User(db.Document):
      
 
 class Loan(db.Document):
-    username=db.StringField(required=True,min_length=True)
+    username=db.StringField(required=True,unique=True,min_length=True)
     loan_type = db.StringField(required=True,unique=True, min_length=3)
     loan_Amount = db.FloatField(required=True, min_length=4)
     date=db.StringField(required=True)

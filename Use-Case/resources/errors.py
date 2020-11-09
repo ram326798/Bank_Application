@@ -8,28 +8,28 @@ class UserNameAlreadyExistsError(Exception):
     pass
 class LoanTypeAlreadyExistsError(Exception):
     pass
+class UserDoesNotExist(Exception):
+    pass
 
 class UnauthorizedError(Exception):
     pass
 errors = {
     "InternalServerError": {
-        "message": "Something went wrong",
-        "status": 500
+        "message": "Something went wrong",        
     },
      "SchemaValidationError": {
          "message": "Request is missing required fields",
-         "status": 400
      },
      "UserNameAlreadyExistsError": {
          "message": "User with given username already exists",
-         "status": 400
      },
      "LoanTypeAlreadyExistsError": {
          "message": "User with given Loan type already exists",
-         "status": 400
+     },
+     "UserDoesNotExist": {
+         "message": "User Does not exist register to apply loan",
      },
      "UnauthorizedError": {
          "message": "Invalid username or password",
-         "status": 401
      }
 }
