@@ -10,8 +10,13 @@ app = Flask(__name__)
 
 api = Api(app, errors=errors)
 
+# app.config['MONGODB_SETTINGS'] = {
+#     'host': 'mongodb://localhost/User-test'
+# }
+
+#For testing 
 app.config['MONGODB_SETTINGS'] = {
-    'host': 'mongodb://localhost/User-test'
+    'host': 'mongodb://localhost/User'
 }
 
 app.config['PROPAGATE_EXCEPTIONS'] = False

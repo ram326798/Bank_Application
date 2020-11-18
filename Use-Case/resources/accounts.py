@@ -4,15 +4,13 @@ from flask_restful import Resource
 from mongoengine.errors import FieldDoesNotExist, NotUniqueError, DoesNotExist,ValidationError,NotRegistered
 from resources.errors import SchemaValidationError,LoanTypeAlreadyExistsError,UserNameAlreadyExistsError, UnauthorizedError,InternalServerError,UserDoesNotExist
 
-
-
+# For user Registration
 class SignupApi(Resource):
     def post(self):
         try:
             body = request.get_json()
             user =  User(**body)
-            user.save()
-            # id = user.id
+            user.save()          
             return 'User Registered sucessfully', 200         
         except FieldDoesNotExist:
             raise SchemaValidationError
@@ -23,30 +21,32 @@ class SignupApi(Resource):
         except Exception as e:
             raise InternalServerError
 
+# for User Login
 class LoginApi(Resource):
     def post(self):
         try:
             body = request.get_json()
-            user = User.objects.get(username=body.get('username'))
-            authorized = User.objects.get(password=body.get('password'))
-            return 'User Login Sucessfully', 200
-            if not authorized:
+            user = User.objects.get(username=body.get('username'),password=body.get('password'))
+        #   If both username and password matches user return 1 and below condition will be true
+            if user:
+                    return 'User Login Sucessfully', 200
+            else:
                 raise UnauthorizedError
         except (UnauthorizedError, DoesNotExist):
             raise UnauthorizedError
         except Exception as e:
             raise InternalServerError
         
-    def put(self,id):
+    def put(self,username):
         body = request.get_json()
-        # user = User(**body)
-        User.objects.get(id=id).update(**body)
+        User.objects.get(username=username).update(**body)
         return "User Updated successfully", 201
     
-    def get(self,id):
-        user=User.objects.get(id=id).to_json()
+    def get(self,username):
+        user=User.objects.get(username=username).to_json()
         return Response(user, mimetype="application/json", status=200)
-    
+
+# For getting applying loan
 class LoanApi(Resource):
     def post(self,username):
         try:
@@ -63,13 +63,9 @@ class LoanApi(Resource):
             raise LoanTypeAlreadyExistsError
         except Exception as e:
             raise InternalServerError
-    def put(self,username):
-        body = request.get_json()
-        # user = User(**body)
-        Loan.objects.get(username=username).update(**body)
-        return "User Updated successfully", 201
     
     def get(self,username): 
-            loan=Loan.objects.get(username=username).to_json()       
-            # loan=Loan.objects().to_json()
+            loan=Loan.objects(username=username).to_json()   
+            # print(loan)
             return Response(loan, mimetype="application/json", status=200)
+            
