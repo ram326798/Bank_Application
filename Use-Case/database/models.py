@@ -1,6 +1,6 @@
 from .db import db
 
-
+# defining Document Structure in a collection
 class User(db.Document):
     username = db.StringField(required=True, unique=True, min_length=6)
     password = db.StringField(required=True,min_length=6)
@@ -13,7 +13,7 @@ class User(db.Document):
     DOB = db.StringField(required=True)
     accountType = db.StringField(required=True)    
      
-
+# defining Document structure in a collection
 class Loan(db.Document):
     username=db.StringField(required=True)
     loan_type = db.StringField(required=True, min_length=3)

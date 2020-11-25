@@ -2,7 +2,7 @@ import json
 
 from tests.BaseCase import BaseCase
 
-
+# test case to apply loan
 class LoanTest(BaseCase):       
     def test_successful_loan(self):
         user = json.dumps({
@@ -34,6 +34,7 @@ class LoanTest(BaseCase):
         response = self.app.post('/accounts/login/ramakrishna/loans', headers={"Content-Type": "application/json"}, data=payload2)        
         self.assertEqual(200, response.status_code)
 
+# Test case to apply loan with unauthorised username
     def test_unsuccessful_loan(self):
         user = json.dumps({
             "username":"ramakrishna",
@@ -64,6 +65,7 @@ class LoanTest(BaseCase):
         response = self.app.post('/accounts/login/krishna/loans', headers={"Content-Type": "application/json"}, data=payload2)        
         self.assertEqual(500, response.status_code)
     
+    # test case to get loan details of an user using username
     def test_successful_getloandetails(self):
         response = self.app.get('/accounts/login/ramakrishna/loans', headers={"Content-Type": "application/json"})        
         self.assertEqual(200, response.status_code)

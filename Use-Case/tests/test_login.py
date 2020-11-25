@@ -2,7 +2,7 @@ import json
 
 from tests.BaseCase import BaseCase
 
-
+# test file to check whether user able to successfull login
 class LoginTest(BaseCase):       
     def test_successful_login(self):
         user = json.dumps({
@@ -25,6 +25,7 @@ class LoginTest(BaseCase):
         response = self.app.post('/accounts/login', headers={"Content-Type": "application/json"}, data=payload)
         self.assertEqual(200, response.status_code)
     
+    # Test case to check giving invalid username
     def test_login_with_invalid_username(self):
         user = json.dumps({
             "username":"ramakrishna",
@@ -47,7 +48,7 @@ class LoginTest(BaseCase):
         self.assertEqual("Invalid username or password", response.json['message'])
         self.assertEqual(500, response.status_code)
  
-    # def test_login_with_invalid_password(self):
+#  Test case to check login with invalid password
     def test_login_with_invalid_password(self):
         user = json.dumps({
             "username":"ramakrishna",

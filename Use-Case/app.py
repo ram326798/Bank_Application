@@ -5,16 +5,10 @@ from resources.routes import initialize_routes
 from resources.errors import errors
 
 app = Flask(__name__)
-
-# app.config.from_envvar('ENV_FILE_LOCATION')
+# In App.py we are connecting with database and initialising db and routes
 
 api = Api(app, errors=errors)
 
-# app.config['MONGODB_SETTINGS'] = {
-#     'host': 'mongodb://localhost/User-test'
-# }
-
-#For testing 
 app.config['MONGODB_SETTINGS'] = {
     'host': 'mongodb://localhost/User'
 }
