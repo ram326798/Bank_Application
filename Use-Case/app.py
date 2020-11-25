@@ -13,6 +13,13 @@ app.config['MONGODB_SETTINGS'] = {
     'host': 'mongodb://localhost/User'
 }
 
+<<<<<<< HEAD
+=======
+#for pytest
+# app.config['MONGODB_SETTINGS'] = {
+#     'host': 'mongodb://localhost/User-test'
+# }
+>>>>>>> 48340382ef8281ae3a621d3983a13a68de3dd902
 app.config['PROPAGATE_EXCEPTIONS'] = False
 
 initialize_db(app)
